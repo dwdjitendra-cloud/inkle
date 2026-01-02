@@ -105,45 +105,35 @@ export const createColumns = (
   {
     accessorKey: 'country',
     header: () => (
-      // Spec: place filter button inline with "Country"; center aligned; 6px gap
       <span style={{ display: 'inline-flex', alignItems: 'center', gap: '6px' }}>
         Country <FilterButton />
       </span>
     ),
-  },
-  {
-    id: 'actions',
-    header: '',
     cell: ({ row }) => (
-      <button
-        onClick={() => onEditClick(row.original)}
-        style={{
-          width: '32px', // Button size 32x32
-          height: '32px',
-          borderRadius: '6px', // Rounded corners
-          background: 'transparent', // Default transparent background
-          border: '1px solid transparent', // Invisible border by default
-          boxSizing: 'border-box',
-          cursor: 'pointer',
-          padding: 0,
-          display: 'inline-flex', // Keep inline flow
-          alignItems: 'center',
-          justifyContent: 'center', // Center icon perfectly
-          transition: 'all 0.15s ease', // Smooth transition
-        }}
-        aria-label="Edit"
-        className="edit-square-button"
-      >
-        <Edit2 size={16} strokeWidth={1.5} />
-      </button>
+      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '100%' }}>
+        <span>{row.original.country}</span>
+        <button
+          onClick={() => onEditClick(row.original)}
+          className="edit-square-button"
+          aria-label="Edit"
+          style={{
+            width: '32px',
+            height: '32px',
+            borderRadius: '6px',
+            background: 'transparent',
+            border: '1px solid transparent',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            boxSizing: 'border-box',
+            cursor: 'pointer',
+            padding: 0,
+            transition: 'all 0.15s ease',
+          }}
+        >
+          <Edit2 size={16} strokeWidth={1.5} />
+        </button>
+      </div>
     ),
   },
-    {
-      accessorKey: 'country',
-      header: () => (
-        <span style={{ display: 'inline-flex', alignItems: 'center', gap: '6px' }}>
-          Country <FilterButton />
-        </span>
-      ),
-    },
 ];
