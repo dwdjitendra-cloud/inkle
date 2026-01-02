@@ -1,0 +1,127 @@
+.edit-square-button {
+	background: transparent !important; /* Default background */
+}
+
+.edit-square-button:hover {
+	background: #f9fafb !important; /* Hover background */
+}
+
+.edit-square-button svg {
+	color: #9ca3af !important; /* Icon color */
+	stroke: #9ca3af !important; /* Ensure lucide stroke uses the color */
+	fill: none !important; /* Outline style */
+	opacity: 0.45 !important; /* Default opacity */
+	transition: all 0.15s ease; /* Smooth transition */
+}
+
+.edit-square-button:hover svg {
+	opacity: 0.75 !important; /* Hover opacity */
+}
+
+.column-filter-button {
+	background: transparent !important; /* Spec: transparent default */
+	border: none !important; /* Spec: no border */
+	border-radius: 4px !important; /* Spec: 4px radius */
+	transition: all 0.15s ease; /* Spec: transition */
+}
+
+.column-filter-button:hover {
+	background: #f3f4f6 !important; /* Spec: hover background */
+}
+
+.column-filter-button svg {
+	color: #9ca3af !important; /* Spec: icon color */
+	stroke: #9ca3af !important; /* Ensure outline color */
+	fill: none !important; /* Outline style */
+	opacity: 0.7 !important; /* Spec: default opacity */
+	transition: all 0.15s ease; /* Spec: transition */
+}
+
+.column-filter-button:hover svg {
+	opacity: 0.9 !important; /* Spec: hover opacity */
+}
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+input:focus {
+	border-color: #6366f1 !important;
+}
+
+.country-dropdown-item:hover {
+	background: #f9fafb !important;
+}
+
+.country-dropdown-item[data-selected='true'] {
+	background: #eef2ff !important;
+}
+
+.country-dropdown-item::before {
+	content: '';
+	display: inline-block;
+	width: 16px;
+	height: 16px;
+	opacity: 0.4; /* Spec: location icon opacity */
+	background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%239CA3AF' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M21 10c0 6-9 13-9 13S3 16 3 10a9 9 0 1 1 18 0Z'/%3E%3Ccircle cx='12' cy='10' r='3'/%3E%3C/svg%3E");
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: 16px 16px;
+	margin-right: 4px; /* Works with item gap */
+}
+
+.country-dropdown-list {
+	scrollbar-width: thin; /* Firefox */
+	scrollbar-color: #d1d5db transparent; /* Firefox */
+}
+
+.country-dropdown-list::-webkit-scrollbar {
+	width: 6px; /* Spec: width 6px */
+}
+
+.country-dropdown-list::-webkit-scrollbar-thumb {
+	background-color: #d1d5db; /* Spec: thumb color */
+	border-radius: 6px; /* Spec: radius 6px */
+}
+
+.country-dropdown-edit:hover {
+	background: #eef2ff !important; /* Spec: hover background */
+	border-color: #c7d2fe !important; /* Spec: hover border color */
+}
+
+.country-dropdown-edit svg {
+	color: #6366f1 !important; /* Spec: icon color */
+	stroke: #6366f1 !important; /* Ensure outline */
+	fill: none !important; /* Outline style only */
+}
+
+.edit-icon-container {
+	background: transparent !important; /* Spec: default background */
+	transition: all 0.15s ease; /* Spec: transition */
+}
+
+.edit-icon-button:hover .edit-icon-container {
+	background: #f9fafb !important; /* Spec: hover background */
+}
+
+.edit-icon-container:hover {
+	background: #f9fafb !important; /* Spec: hover background */
+}
+
+.edit-icon-button .edit-icon-container svg {
+	color: #9ca3af !important; /* Subtle gray per spec */
+	stroke: #9ca3af !important; /* Apply to lucide stroke */
+	fill: none !important; /* Keep outline style */
+	opacity: 0.45 !important; /* Default opacity */
+	transition: all 0.15s ease; /* Transition */
+}
+.edit-icon-button .edit-icon-container svg path {
+	stroke: #9ca3af !important; /* Ensure path stroke is gray */
+}
+
+.edit-icon-button:hover .edit-icon-container svg {
+	opacity: 0.75 !important; /* Hover icon opacity */
+}
+
+.edit-icon-container:hover svg {
+	opacity: 0.75 !important; /* Spec: hover icon opacity */
+}
