@@ -8,54 +8,73 @@ import { useState } from 'react';
 // Does not alter table logic or apply any filtering; purely visual.
 const FilterButton = () => {
   const [open, setOpen] = useState(false);
-
+  const [selected, setSelected] = useState<string[]>([]);
+  const options = ["India", "US", "UK"];
+  const handleChange = (option: string) => {
+    setSelected((prev) =>
+      prev.includes(option)
+        ? prev.filter((o) => o !== option)
+        : [...prev, option]
+    );
+    // TODO: Implement table filtering logic here if needed
+  };
   return (
     <span style={{ position: 'relative', display: 'inline-flex', alignItems: 'center' }}>
-      {/* Spec: gap between text and icon is handled by header container; button itself is 24x24 */}
       <button
         className="column-filter-button"
         aria-label="Filter"
         onClick={() => setOpen((v) => !v)}
-        // Spec: button container sizing and centering
         style={{
+          width: '24px',
           height: '24px',
-          borderRadius: '4px', // Spec: radius 4px
-          background: 'transparent', // Spec: default transparent background
-          border: 'none', // Spec: no border
+          borderRadius: '4px',
+          background: 'transparent',
+          border: 'none',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
           cursor: 'pointer',
-          transition: 'all 0.15s ease', // Spec: smooth transition
+          transition: 'all 0.15s ease',
           padding: 0,
         }}
       >
-        <Filter size={14} /> {/* Spec: outline funnel icon 14x14 */}
+        <Filter size={14} color="#6366F1" style={{ opacity: 1 }} />
       </button>
       {open && (
         <div
           className="column-filter-popover"
-          // Spec: popover positioned below the icon
           style={{
+            position: 'absolute',
             top: 'calc(100% + 6px)',
             right: 0,
-            background: '#FFFFFF', // Spec: popover background
-            borderRadius: '8px', // Spec: radius 8px
-            boxShadow: '0px 10px 25px rgba(0, 0, 0, 0.08)', // Spec: shadow
-            padding: '8px', // Spec: padding 8px
+            background: '#FFFFFF',
+            borderRadius: '8px',
+            boxShadow: '0px 10px 25px rgba(0, 0, 0, 0.08)',
+            padding: '8px',
             zIndex: 20,
             minWidth: '140px',
           }}
         >
-          {/* Spec: vertical list of checkboxes, 8px spacing, labels 14px, color #111827 */}
-          <label style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '8px', fontSize: '14px', color: '#111827' }}>
-          </label>
-          <label style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '8px', fontSize: '14px', color: '#111827' }}>
-            <input type="checkbox" /> <span>US</span>
-          </label>
-          <label style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: 0, fontSize: '14px', color: '#111827' }}>
-            <input type="checkbox" /> <span>UK</span>
-          </label>
+          {options.map((option, idx) => (
+            <label
+              key={option}
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: '8px',
+                marginBottom: idx < options.length - 1 ? '6px' : 0,
+                fontSize: '14px',
+                color: '#111827',
+              }}
+            >
+              <input
+                type="checkbox"
+                checked={selected.includes(option)}
+                onChange={() => handleChange(option)}
+              />
+              <span>{option}</span>
+            </label>
+          ))}
         </div>
       )}
     </span>
@@ -67,16 +86,16 @@ export const createColumns = (
 ): ColumnDef<Tax>[] => [
   {
     accessorKey: 'name',
-    header: 'Entity',
+    header: <span style={{ fontSize: '12px', fontWeight: 500, letterSpacing: '0.04em', color: '#6B7280' }}>Entity</span>,
     cell: ({ row }) => (
-      <span style={{ color: '#5B6CFF', fontWeight: 500 }}>
+      <span style={{ color: '#5B6CFF', fontWeight: 500, fontSize: '14px' }}>
         {row.original.name}
       </span>
     ),
   },
   {
     accessorKey: 'gender',
-    header: 'Gender',
+    header: <span style={{ fontSize: '12px', fontWeight: 500, letterSpacing: '0.04em', color: '#6B7280' }}>Gender</span>,
     cell: ({ row }) => {
       const gender = row.original.gender;
       const isMale = gender.toLowerCase() === 'male';
@@ -99,19 +118,20 @@ export const createColumns = (
   },
   {
     accessorKey: 'requestDate',
-    header: 'Request Date',
-    cell: ({ row }) => <span>{formatDate(row.original.requestDate)}</span>,
+    header: <span style={{ fontSize: '12px', fontWeight: 500, letterSpacing: '0.04em', color: '#6B7280' }}>Request Date</span>,
+    cell: ({ row }) => <span style={{ fontSize: '14px', color: '#111827' }}>{formatDate(row.original.requestDate)}</span>,
   },
   {
     accessorKey: 'country',
     header: () => (
-      <span style={{ display: 'inline-flex', alignItems: 'center', gap: '6px' }}>
-        Country <FilterButton />
+      <span style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', fontSize: '12px', fontWeight: 500, letterSpacing: '0.04em', color: '#6B7280' }}>
+        Country
+        <FilterButton />
       </span>
     ),
     cell: ({ row }) => (
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '100%' }}>
-        <span>{row.original.country}</span>
+        <span style={{ fontSize: '14px', color: '#111827' }}>{row.original.country}</span>
         <button
           onClick={() => onEditClick(row.original)}
           className="edit-square-button"
@@ -131,7 +151,7 @@ export const createColumns = (
             transition: 'all 0.15s ease',
           }}
         >
-          <Edit2 size={16} strokeWidth={1.5} />
+          <Edit2 size={16} strokeWidth={1.5} color="#9CA3AF" style={{ opacity: 0.45 }} />
         </button>
       </div>
     ),
