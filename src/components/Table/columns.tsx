@@ -1,3 +1,7 @@
+// Utility: Title Case a string (handles single/multi-word)
+function toTitleCase(str: string) {
+  return str.replace(/\w\S*/g, (txt) => txt.charAt(0).toUpperCase() + txt.slice(1).toLowerCase());
+}
 import { ColumnDef } from '@tanstack/react-table';
 import { Tax } from '../../types/tax.types';
 import { formatDate } from '../../utils/formatDate';
@@ -111,7 +115,7 @@ export const createColumns = (
             color: isMale ? '#DC2626' : '#2563EB',
           }}
         >
-          {gender}
+          {toTitleCase(gender)}
         </span>
       );
     },
@@ -131,7 +135,7 @@ export const createColumns = (
     ),
     cell: ({ row }) => (
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '100%' }}>
-        <span style={{ fontSize: '14px', color: '#111827' }}>{row.original.country}</span>
+        <span style={{ fontSize: '14px', color: '#111827' }}>{toTitleCase(row.original.country)}</span>
         <button
           onClick={() => onEditClick(row.original)}
           className="edit-square-button"
@@ -150,6 +154,8 @@ export const createColumns = (
             padding: 0,
             transition: 'all 0.15s ease',
           }}
+          onMouseOver={e => e.currentTarget.style.background = '#F9FAFB'}
+          onMouseOut={e => e.currentTarget.style.background = 'transparent'}
         >
           <Edit2 size={16} strokeWidth={1.5} color="#9CA3AF" style={{ opacity: 0.45 }} />
         </button>
